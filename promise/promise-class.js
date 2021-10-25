@@ -177,6 +177,55 @@ class Mpromise {
       reject(reason);
     });
   }
+
+  static race(promiseList) {
+    return new Mpromise((resolve, reject) => {
+      const length = promiseList.length;
+      if (length === 0) {
+        return resolve();
+      } else {
+        for (let index = 0; index < length; index++) {
+          Mpromise.resolve(promiseList[index])
+          .then((value) => {
+            return resolve(value);
+          })
+          .catch((reason) => {
+            return reject(reason);
+          });
+        }
+      }
+    });
+  }
+
+  static all(promiseList) {
+    return new Mpromise((resolve, reject) => {
+      const length = promiseList.length;
+      const stack = [];
+      if (length === 0) {
+        return reject();
+      } else {
+        for (let index = 0; index < length; index++) {
+          Mpromise.resolve(promiseList[index])
+          .then((value) => {
+            stack.push({
+              index,
+              value,
+            });
+            if (stack.length === length) {
+              const result = [];
+              stack.forEach((item) => {
+                result[item.index] = item.value;
+              });
+              return resolve(result);
+            }
+          })
+          .catch((reason) => {
+            return reject(reason);
+          });
+        }
+      }
+    });
+  }
 }
 
 
@@ -240,18 +289,18 @@ Mpromise {
  */
 
 //3
-const p = new Mpromise((resolve, reject) => {
-  setTimeout(() => {
-    reject(1111)
-  }, 1000);
-}).catch((reason) => {
-  console.log('报错', reason);
-  console.log(p, '==== inner'); // 猜一下status是什么 pending
-})
+// const p = new Mpromise((resolve, reject) => {
+//   setTimeout(() => {
+//     reject(1111)
+//   }, 1000);
+// }).catch((reason) => {
+//   console.log('报错', reason);
+//   console.log(p, '==== inner'); // 猜一下status是什么 pending
+// })
 
-setTimeout(() => {
-  console.log(p, '==== outer'); // 猜一下status是什么 fulfilled
-}, 2000);
+// setTimeout(() => {
+//   console.log(p, '==== outer'); // 猜一下status是什么 fulfilled
+// }, 2000);
 
 /**
  *  报错 1111
@@ -276,3 +325,27 @@ setTimeout(() => {
 // 2、.catch打印console.log的过程，其实是执行回调函数的过程中，而只有回调函数执行完成了，
 // 无论是正常的还是报错的，promise2才有一个新的结果。
 
+
+// test
+const p1 = new Mpromise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(11);
+  }, 1000);
+});
+
+const p2 = new Mpromise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(22);
+  }, 2000);
+});
+Mpromise.race([p1, p2]).then((arr) => {
+  console.log(arr);
+}).catch((error) => {
+  console.log(error);
+});
+
+Mpromise.all([p1, p2]).then((arr) => {
+  console.log(arr);
+}).catch((error) => {
+  console.log(error);
+});
