@@ -51,7 +51,7 @@
           /**
            * https://www.npmjs.com/package/spark-md5 示例代码
           */
-          let chunkSize = 2097152, // Read in chunks of 2MB
+          let chunkSize = 2097152, // Read in chunks of 2MB 2*1024*1024 B(字节)
               chunks = Math.ceil(file.size / chunkSize),
               currentChunk = 0,
               spark = new SparkMD5.ArrayBuffer(),
