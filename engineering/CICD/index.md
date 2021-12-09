@@ -1,0 +1,3 @@
+nginx
+jenkins
+CI/CD
