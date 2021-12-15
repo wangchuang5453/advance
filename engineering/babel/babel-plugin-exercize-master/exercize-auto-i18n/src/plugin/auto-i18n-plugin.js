@@ -19,6 +19,7 @@ const autoTrackPlugin = declare((api, options, dirname) => {
     function getReplaceExpression(path, value, intlUid) {
         const expressionParams = path.isTemplateLiteral() ? path.node.expressions.map(item => generate(item).code) : null
         let replaceExpression = api.template.ast(`${intlUid}.t('${value}'${expressionParams ? ',' + expressionParams.join(',') : ''})`).expression;
+        // JSX <div title={"测试"} name="sss">
         if (path.findParent(p => p.isJSXAttribute()) && !path.findParent(p=> p.isJSXExpressionContainer())) {
             replaceExpression = api.types.JSXExpressionContainer(replaceExpression);
         }
