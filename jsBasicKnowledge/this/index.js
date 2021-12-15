@@ -1,18 +1,39 @@
-var length = 3;
+Function.prototype.myBind = function (context, ...args) {
+  context = context || window;
 
-function fn() {
-  console.log(this.length);
-}
+  const fnSymbol = Symbol('fn');
+  context[fnSymbol] = this;
+  console.log(this);
 
-var obj = {
-  name: 'wang',
-  print: function (fn) {
-    fn(); // 3
-    arguments[0](); // 2  - arguments是类数组对象，{ 0:fn, 1: 1, length:2 }，它有个length
+  return function (..._args) {
+    args = args.concat(_args);
+    context[fnSymbol](...args);
+    delete context[fnSymbol];
   }
 }
 
-obj.print(fn, 1); // 3   2
+let obj = {
+  name: 'hah',
+  fn(param) {
+    this.name = 'hhh';
+    // console.log(this);/
+    console.log(param);
+  }
+}
+
+// const fn = obj.fn.myBind(obj, 1);
+// fn();
+// console.log(obj);
 
 
+Function.prototype.myCall = function (context, ...args) {
+  context = typeof context == 'object' ? context : window;
 
+  const fnSymbol = Symbol('fn');
+  context[fnSymbol] = this;
+
+  const result = context[fnSymbol](...args);
+
+  delete context[fnSymbol];
+  return result;
+}
