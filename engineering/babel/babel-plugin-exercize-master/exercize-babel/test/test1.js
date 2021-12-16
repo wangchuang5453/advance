@@ -19,6 +19,8 @@ const ast = parser.parse(sourceCode, {
     plugins: ['literal', 'guangKeyword']
 });
 
+console.log(ast);
+
 traverse(ast, {
     Program(path) {
        Object.entries(path.scope.bindings).forEach(([id, binding]) => {
