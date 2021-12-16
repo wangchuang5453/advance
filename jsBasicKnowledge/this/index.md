@@ -151,9 +151,9 @@ t2(); // dadahaha 这里没有修饰但是没有指向全局，说明有优先�
 ```js
 // 模拟new
 function _new(fn, ...args) {
-  const obj = Object.create(fn.prototype);
+  const obj = Object.create(fn.prototype); // 相当于 obj.__proto__ = fn.prototype
   const res = fn.apply(obj, args);
-  return res instanceof Object ? res : obj;
+  return typeof res === 'object' ? res : obj;
 }
 
 ```
