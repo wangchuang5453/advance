@@ -1,4 +1,4 @@
-const { swap, generateRandomArray, testSort, generateNearlyOrderedArray } = require('./sortTestHelper.js');
+const { swap } = require('./sortTestHelper.js');
 /**
  * 选择排序 O(n^2)
  */
@@ -61,6 +61,18 @@ function insertionSort3(arr) {
   }
 }
 
+// [l, r]
+function insertionSortLR(arr, l, r) {
+  for (let i = l + 1; i <= r; i++) {
+    let e = arr[i];
+    let j;
+    for (j = i; j > l && arr[j - 1] > e; j--) {
+      arr[j] = arr[j - 1];
+    }
+    // 循环最后j还会减一次1
+    arr[j] = e;
+  }
+}
 
 // let insertArr = testArr.concat([]);
 // let orderedArr = generateNearlyOrderedArray(10000, 100);
@@ -125,15 +137,12 @@ function shellSort(arr) {
 
 
 
+module.exports = {
+  selectionSort,
+  insertionSort3,
+  bubbleSort,
+  shellSort,
+  insertionSortLR,
+}
 
 
-const bubbleArr = generateRandomArray(10000, 0, 100000);
-// const bubbleArr = generateNearlyOrderedArray(10000, 100)
-// const bubbleArr = generateNearlyOrderedArray(10000, 100).reverse();
-// const bubbleArr = generateNearlyOrderedArray(10000, 0);
-// const copy = bubbleArr.concat([]);
-testSort(selectionSort, bubbleArr.concat([]))
-testSort(insertionSort3, bubbleArr.concat([]))
-testSort(bubbleSort, bubbleArr.concat([]));
-testSort(shellSort, bubbleArr.concat([]));
-// console.log(copy);
