@@ -24,7 +24,7 @@ function _mergeSort(arr, l, r) { // [l, r]
 
   let mid = Math.floor( (l + r) / 2 );
 
-  _mergeSort(arr, l, mid);
+  _mergeSort(arr, l, mid); // 范围内数据已经通过归并完成了排序
 
   _mergeSort(arr, mid + 1, r);
 
@@ -44,7 +44,7 @@ function _merge(arr, l, mid, r) {
   let i = l;
   let j = mid + 1;
   for (let k = l; k <= r; k++) {
-    if (i > mid) {
+    if (i > mid) { // 肯定有一个先处理完，如果先是i这边的话，j那边一定没处理完
       arr[k] = copy[j - l];
       j++;
     } else if (j > r) {
@@ -69,7 +69,7 @@ function _merge(arr, l, mid, r) {
 function mergeSortBU(arr) { // 比上面的慢一些
   const n = arr.length;
   for (let sz = 1; sz < n; sz += sz) { // 1 2 4 8
-    for (let i = 0; i + sz < n; i += sz + sz) {
+    for (let i = 0; i + sz < n; i += sz + sz) { // 2sz代表一个[l,r]
       _merge(arr, i, i + sz -1, Math.min(i + sz + sz - 1, n - 1));
     }
   }
