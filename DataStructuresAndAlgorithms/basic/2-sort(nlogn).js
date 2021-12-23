@@ -89,10 +89,6 @@ function quickSort(arr) {
   _quickSort(arr, 0, n-1);
 }
 
-function quickSort2(arr) {
-  const n = arr.length;
-  _quickSort2(arr, 0, n-1);
-}
 
 function _quickSort(arr, l, r) {
   if (l>= r) {
@@ -100,7 +96,16 @@ function _quickSort(arr, l, r) {
   }
   const p = _partition(arr, l, r);
   _quickSort(arr, l, p-1);
-  _quickSort(arr, p+1, r)
+  _quickSort(arr, p+1, r) // 注意是p+1
+}
+
+/**
+ * 优化
+ * @param {*} arr 
+ */
+function quickSort2(arr) {
+  const n = arr.length;
+  _quickSort2(arr, 0, n-1);
 }
 
 function _quickSort2(arr, l, r) {
