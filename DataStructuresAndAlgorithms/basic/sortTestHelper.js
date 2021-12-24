@@ -34,7 +34,7 @@ exports.generateRandomArray = function (n, rangL, rangR) {
  */
 exports.testSort = function (fn, arr) {
   console.time(fn.name);  
-  fn(arr);
+  fn(arr, arr.length);
   console.timeEnd(fn.name);
   const status = isSorted(arr);
   console.log(`is sorted: ${status}`);
