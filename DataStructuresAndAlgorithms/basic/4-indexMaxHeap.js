@@ -3,8 +3,9 @@
  */
 
 class IndexMaxHeap {
-  constructor() {
+  constructor(capacity) {
     this.count = 0;
+    this.capacity = capacity;
   }
   
   _data = [];
@@ -58,9 +59,10 @@ class IndexMaxHeap {
   }
 
   insert(i, item) {
-    if (i < 0) {
-      return;
+    if (i < 0 || i >= this.capacity) {
+      throw new Error('index not within capacity');
     }
+    
     i += 1;
     this._data[i] = item; // 从1开始存储数据
     this._indexes[this.count + 1] = i; // 堆从1开始

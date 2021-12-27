@@ -5,8 +5,9 @@ const { swap } = require('./sortTestHelper.js');
  */
 
 class MaxHeap {
-  constructor() {
+  constructor(capacity) {
     this.count = 0;
+    this.capacity = capacity;
   }
   
   _data = [];
@@ -49,6 +50,9 @@ class MaxHeap {
   }
 
   insert(item) {
+    if (this._data.length >= this.capacity) {
+      throw new Error('over capacity');
+    }
     this._data[this.count + 1] = item; // 堆从1开始
     this.count++;
     this._shiftUp(this.count);
