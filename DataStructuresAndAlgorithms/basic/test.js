@@ -8,8 +8,9 @@ const {
 
 const { mergeSort, mergeSortBU, quickSort, quickSort2, quickSort3, quickSort4, quickSort3Way } = require('./2-sort(nlogn).js');
 const { heapSort1, heapSort2, heapSort3 } = require('./3-heapSort.js');
+const { getTopK } = require('./4-indexMaxHeap-ex.js');
 
-const bubbleArr = generateRandomArray(1000000, 0, 10000000);
+const bubbleArr = generateRandomArray(10000, 0, 10000000);
 // const bubbleArr = generateNearlyOrderedArray(1000000, 100)
 // const bubbleArr = generateNearlyOrderedArray(10000, 100).reverse();
 // const bubbleArr = generateNearlyOrderedArray(10000, 0);
@@ -22,7 +23,7 @@ const bubbleArr = generateRandomArray(1000000, 0, 10000000);
 // testSort(shellSort, bubbleArr.concat([]));
 
 
-testSort(mergeSort, bubbleArr.concat([]));
+// testSort(mergeSort, bubbleArr.concat([]));
 // testSort(mergeSortBU, bubbleArr.concat([]));
 // testSort(quickSort, bubbleArr.concat([]));
 
@@ -49,19 +50,30 @@ testSort(mergeSort, bubbleArr.concat([]));
   * 
   * 3路快排
   */
-testSort(quickSort3Way, bubbleArr.concat([]));
+// testSort(quickSort3Way, bubbleArr.concat([]));
 
 /**
  * 基础堆排序1
  */
-testSort(heapSort1, bubbleArr.concat([]));
+// testSort(heapSort1, bubbleArr.concat([]));
 
 /**
  * 堆排序2
  */
-testSort(heapSort2, bubbleArr.concat([]));
+// testSort(heapSort2, bubbleArr.concat([]));
 
 /**
  * 原地堆排序
  */
-testSort(heapSort3, bubbleArr.concat([]));
+// testSort(heapSort3, bubbleArr.concat([]));
+
+/**
+ * 获取前 m 个数据
+ * 1、使用排序获取，O(nlogn)
+ * 2、使用堆的方式获取，O(nlogm)
+ */
+
+testSort(getTopK, bubbleArr.concat([]));
+
+
+
