@@ -29,6 +29,42 @@ class BST {
     this.root = this._insert(this.root, key, value);
   }
 
+  contain(key) {
+    return this._contain(this.root, key);
+  }
+
+  search(key) {
+    return this._search(this.root, key);
+  }
+
+  _search(node, key) {
+    if (node === null) {
+      return null;
+    }
+
+    if (key === node.key) {
+      return node.value;
+    } else if (key < node.key) {
+      return this._search(node.left, key);
+    } else {
+      return this._search(node.right, key);
+    }
+  }
+
+  _contain(node, key) {
+    if (node === null) {
+      return false;
+    }
+
+    if (key === node.key) {
+      return true;
+    } else if (key < node.key) {
+      return this._contain(node.left, key);
+    } else {
+      return this._contain(node.right, key);
+    }
+  }
+
   // 向以node为根的二叉树中，插入节点(key, value)
   // 返回插入新节点后的二叉搜索树的根
   _insert(node, key, value) {
