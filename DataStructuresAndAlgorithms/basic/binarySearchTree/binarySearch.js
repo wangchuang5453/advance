@@ -50,6 +50,7 @@ function _binarySearch(arr, target, l, r) { // [l, r]
  * ceil  表示最后一次出现的索引
  * 2、如果查找42没有，但是有41和43，那么floor不是返回-1，而是返回41，ceil返回43
  * 
+ * 认真看下面注释
  */
 
 // 二分查找法, 在有序数组arr中, 查找target
