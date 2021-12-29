@@ -298,6 +298,14 @@ function _merge(arr, l, gap, r) {
   }
 }
 
+/**
+ * 二叉堆 Binary Heap
+ */
+
+/**
+ * d叉堆
+ * d-ary heap
+ */
 
 
 
