@@ -307,14 +307,133 @@ class BST {
    * 寻找前驱
    * 
    */
-  predecessor(key) {
-    const pKey = this._predecessor(this.root, key);
+  predecessor(node, key) {
+    const keyNode = this._search(node, key);
+    if (keyNode === null) {
+      return null;
+    }
+    if (keyNode.left !== null) {
+      return this._maximum(keyNode).key;
+    }
+    // 从根节点找这个前驱
+    const preNode = this._predecessorFromAncestor(this.root, key);
+    return preNode === null ? null : preNode.key;
   }
 
-  _predecessor(node, key) {
+  /**
+   * 从根节点到key的路径上（祖先中）找前驱
+   * 算法调用前已保证key存在在以node为根的二叉树中
+   * 
+   * @param {*} node 
+   * @param {*} key 
+   * 返回比key小的最大值所在节点
+   */
+  _predecessorFromAncestor(node, key) {
+    //
+    if (node.key === key) {
+      return null;
+    }
+    if (key < node.key) {
+      return this._predecessorFromAncestor(node.left, key);
+    } else { // key > node.key
+      // 递归函数在不调用递归的地方停止，才会停止继续递归
+      // 如果当前节点小于key, 则当前节点有可能是比key小的最大值
+      // 向右继续搜索, 将结果存储到tempNode中
+      let tempNode = this._predecessorFromAncestor(node.right, key);
+      if (tempNode) { // 如果tempNode不为空，则找到了这个值，则直接返回
+        return tempNode; // 用于层层返回找到的那个node，就是下面这个return的node
+      } else { // 如果tempNode为空，则当前节点即为结果
+        return node;
+      }
+    }
+  }
+
+  /**
+   * 寻找后继
+   * node为根节点，在比key大的值中最小的那一个
+   * @param {*} node 
+   * @param {*} node
+   */
+  successor(node, key) {
+    const keyNode = this._search(node, key);
+    if (keyNode === null) {
+      return null;
+    }
+    if (keyNode.right !== null) {
+      return this._minimum(keyNode.right, key).key;
+    }
+    const sucNode = this._successorFromAncestor(node, key);
+    return sucNode === null ? null : sucNode.key;
+  }
+
+  /**
+   * 在node到key的路径中寻找后继
+   * 
+   */
+  _successorFromAncestor(node, key) {
+    if (node.key === key) {
+      return null;
+    }
+    if (key > node.key) {
+      return this._successorFromAncestor(node.right, key);
+    } else {
+      const tempNode = this._successorFromAncestor(node.left, key);
+      if (tempNode) {
+        return tempNode;
+      } else {
+        return node;
+      }
+    }
+  }
+
+  /**
+   * 寻找key的floor值, 递归算法
+   * 如果不存在key的floor值(key比BST中的最小值还小), 返回NULL
+   * @param {*} key 
+   * @returns 
+   */
+  floor(key) {
+    if (this.count === 0 || key < this.minimum()) {
+      return null;
+    }
+    const floorNode = this._floor(this.root, key);
+    return floorNode.key;
+  }
+
+  /**
+   * 
+   * @param {*} node 
+   * @param {*} key 
+   * 返回floor的node 目前是没有重复值的情况，相等就是key，小于key的那个最大值
+   */
+  _floor(node, key) {
+    // 如果不存在这个key，node == null也可以意思是找尽了，根据二叉搜索树的插入规则，一定有这个floor，可以自己造数据试试
+    if (node === null) {
+      return null;
+    }
+    if (node.key === key) {
+      return node;
+    }
+    if (key < node.key) { 
+      return this._floor(node.left, key);
+    }
     
-
+    const tempNode = this._floor(node.right, key);
+    if (tempNode !== null) {
+      return tempNode;
+    }
+    
+    return node;
   }
+
+  ceil() {
+    // 
+  }
+
+  _ceil() {
+    // 
+  }
+
 
 
   /**
