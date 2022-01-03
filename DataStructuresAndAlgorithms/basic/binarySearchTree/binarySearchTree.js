@@ -1,9 +1,17 @@
+// const log4js = require("log4js");
+// const logger = log4js.getLogger();
+// logger.level = "debug";
+// log4js.configure({
+//   appenders: { cheese: { type: "file", filename: "cheese.log" } },
+// });
 /**
  * 
  */
 
+
 class myNode {
   constructor(key, value) {
+    this.nodeCount = 1;
     this.key = key;
     this.value = value;
     this.left = null; // Node
@@ -91,8 +99,10 @@ class BST {
     if (key === node.key) {
       node.value = value; // 更新操作
     } else if (key < node.key) {
+      node.nodeCount++; // 经过即+1
       node.left = this._insert(node.left, key, value);
     } else {
+      node.nodeCount++;
       node.right = this._insert(node.right, key, value);
     }
     return node;
@@ -148,6 +158,7 @@ class BST {
   inOrder() {
     this._inOrder(this.root);
   }
+  
   _inOrder(node) {
     if (node !== null) {
       this._inOrder(node.left);
@@ -176,11 +187,12 @@ class BST {
    * 层序遍历
    */
   levelOrder() {
-    let q = []; // 当做队列使用
+    let q = this.q = []; // 当做队列使用
     q.push(this.root);
     while (q.length > 0) {
       let node = q.shift(0);
-      console.log(node.key);
+      // console.log(node.key);
+      console.log(node.nodeCount);
       if (node.left) {
         q.push(node.left);
       }
@@ -222,6 +234,7 @@ class BST {
       return rightNode;
     }
     node.left = this._removeMin(node.left); // 上面 this.root = this._removeMin(this.root);
+    node.nodeCount--;
     return node; // 为了配合node.left===null的return 自己覆盖一下自己
   }
 
@@ -276,9 +289,11 @@ class BST {
     }
     if (key < node.key) {
       node.left = this._remove(node.left, key);
+      node.nodeCount--;
       return node;
-    } else if (k > node.key) {
+    } else if (key > node.key) {
       node.right = this._remove(node.right, key);
+      node.nodeCount--;
       return node;
     } else {
       if (node.left === null) {
@@ -297,6 +312,7 @@ class BST {
       let copySuccessor = new myNode(successor.key, successor.value);
       this.count++; // this._removeMin会减掉一个，这里补一下
       copySuccessor.right = this._removeMin(node.right);
+      copySuccessor.nodeCount = --node.nodeCount;
       copySuccessor.left = node.left;
       this.count--;
       return copySuccessor;
@@ -434,6 +450,60 @@ class BST {
     // 
   }
 
+  /**
+   * 二分搜索树的rank
+   */
+  rank(key) {
+    const rankNum = this._rank(this.root, key);
+    console.log(rankNum, '=== rank num');
+  }
+ 
+  /**
+   * 返回顺序
+   */
+  _rank(node, key) { // 以node为根节点的排序
+    if (node === null) {
+      return 0;
+    }
+
+    if (key === node.key) {
+      return this.getNodeCount(node.left);
+    } else if (key < node.key) {
+      return this._rank(node.left, key);
+    } else {
+      return this.getNodeCount(node.left) + 1 + this._rank(node.right, key);
+    }
+  }
+
+  /**
+   * 在node中找到排名为k的键
+   */
+  select(k) {
+    const key = this._select(this.root, k).key;
+    console.log(key, '=== select');
+  }
+
+  _select(node, k) {
+    if (node === null) {
+      return null;
+    }
+    let nodeRank = this.getNodeCount(node.left);
+    if (k === nodeRank) {
+      return node;
+    } else if (k < nodeRank) {
+      return this._select(node.left, k);
+    } else {
+      return this._select(node.right, k - nodeRank - 1);
+    }
+  }
+
+  getNodeCount(node) {
+    if (node === null) {
+      return 0;
+    }
+    return node.nodeCount;
+  }
+
 
 
   /**
@@ -444,18 +514,26 @@ class BST {
   }
 }
 
-// const bst = new BST();
-// bst.insert(99, 0);
-// bst.insert(98, 1);
-// bst.insert(100, 2);
+const bst = new BST();
+bst.insert(41, 0);
+bst.insert(22, 1);
+bst.insert(58, 2);
 
-// bst.insert(96, 0);
-// bst.insert(101, 1);
-// bst.insert(95, 2);
+bst.insert(15, 0);
+bst.insert(33, 1);
+bst.insert(13, 2);
+bst.insert(37, 2);
 
-// bst.insert(102, 0);
-// bst.insert(103, 1);
-// bst.insert(94, 2);
+bst.insert(50, 0);
+bst.insert(63, 1);
+bst.insert(42, 2);
+bst.insert(53, 2);
+// logger.debug(bst.data);
+// bst.levelOrder();
+// console.log(bst.q);
+// bst.remove(50);
+// console.log('======');
+// bst.levelOrder();
+// bst.rank(58); // 9
 
-// console.log(bst.root);
-// bst.inOrder();
+bst.select(9); // 58
