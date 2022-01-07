@@ -45,7 +45,7 @@ function _merge(arr, l, mid, r) {
   let j = mid + 1;
   for (let k = l; k <= r; k++) {
     if (i > mid) { // 肯定有一个先处理完，如果先是i这边的话，j那边一定没处理完
-      arr[k] = copy[j - l];
+      arr[k] = copy[j - l];// 如果超了，每次都会进入这个判断，如果j没超，那就是一直赋值j的数据了
       j++;
     } else if (j > r) {
       arr[k] = copy[i - l];
@@ -162,7 +162,7 @@ function _quickSort3(arr, l, r) {
 
 function _partition2(arr, l, r) {
   // 优化
-  let rIndex = Math.floor(Math.random()*(r-l+1)) + l;
+  let rIndex = Math.floor(Math.random()*(r-l+1)) + l; // 囊括r [l, r]
   swap(arr, l, rIndex);
 
   let v = arr[l];
@@ -205,9 +205,9 @@ function _partition4(arr, l, r) {
   let v = arr[l];
   let i = l + 1; let j = r;
   while(true) {
-    while(i <= r && arr[i] < v) i++;
-    while(j >= l + 1 && arr[j] > v) j--;
-    if (i > j) {
+    while(i <= r && arr[i] < v) i++; // >=v的拿去交换 l可以取到r，如果v就是最大值就这样
+    while(j >= l + 1 && arr[j] > v) j--; // <=v的拿去交换
+    if (i > j) { // i可以等于j
       break;
     }
     swap(arr, i, j); // 换的数据包含和v相等的，解决了相等数据不平衡问题，换完之后往前走看下一个去了
@@ -216,7 +216,7 @@ function _partition4(arr, l, r) {
   }
   swap(arr, j, l);
 
-  return j;
+  return j; // j此时处于<v的最后一个数值上，因为符合<v条件之后还要多走一步
 }
 
 /**
@@ -239,16 +239,17 @@ function _quickSort3Way(arr, l, r) {
   let rIndex = Math.floor(Math.random()*(r-l+1)) + l;
   swap(arr, l, rIndex);
   let v = arr[l];
+  // 开始表演了
   let lt = l;
   let gt = r + 1;
   let i = l + 1;
   while(i < gt) { // i处在gt和相等的数据之间
     if (arr[i] < v) {
-      swap(arr, lt + 1, i);
+      swap(arr, lt + 1, i); // lt+1 可遍历数据中的下一个
       lt ++;
       i ++;
     } else if (arr[i] > v) {
-      swap(arr, gt - 1, i);
+      swap(arr, gt - 1, i); // gt-1 可遍历数据中的下一个
       gt --;
     } else {
       i++;
@@ -256,7 +257,7 @@ function _quickSort3Way(arr, l, r) {
   }
   swap(arr, l, lt);
 
-  _quickSort3Way(arr, l, lt -1);
+  _quickSort3Way(arr, l, lt -1); // 相等的可以留下了
   _quickSort3Way(arr, gt, r);
 }
 

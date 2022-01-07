@@ -94,11 +94,11 @@ function _quickSort3Way(arr, l, r, num) {
   }
   swap(arr, l, lt);
 
-  if (num >= lt && num <= gt - 1) {
+  if (num >= lt && num <= gt - 1) { // 也可以不用三路快排，都可以找到
     return arr[lt];
   } else if (num < lt) {
-    _quickSort3Way(arr, l, lt -1);
+    return _quickSort3Way(arr, l, lt -1);
   } else {
-    _quickSort3Way(arr, gt, r);
+    return _quickSort3Way(arr, gt, r);
   }
 }
