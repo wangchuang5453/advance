@@ -36,10 +36,10 @@ class MinHeap {
   }
 
   insertWithinCapacity(item) {
-    if (this.count > this.capacity) {
+    this.insert(item); // 插完再删除大的，不会漏掉
+    if (this.count > this.capacity + 1) { // 别忘了0是空的
       this.extractMin();
     }
-    this.insert(item)
   }
 
   extractMin() {

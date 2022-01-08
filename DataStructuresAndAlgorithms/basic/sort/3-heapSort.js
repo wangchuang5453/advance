@@ -25,6 +25,8 @@ class MaxHeap {
   _shiftDown(k) { 
     while(2*k <= this.count) { // 看子元素是否越界
       let j = 2*k;
+      // https://www.cnblogs.com/idorax/p/6441043.html
+      // 完全二叉树最后一层靠左对齐，都在最左侧 j+1 <= this.count
       if (j+1 <= this.count && this._data[j+1] > this._data[j]) {
         j++;
       }
@@ -208,7 +210,7 @@ function heapSort3(arr, n) {
     _shiftDown3(arr, n, i);
   }
   // 经过上一步的heapify，此时第一个数据就是最大值
-  // 最大值和最后一个数据交换
+  // 最大值和最后一个数据交换，指针-1
   // 然后继续shiftdown，得到从小到大的顺序
   for (let i = n-1; i > 0 ; i--) {
     swap(arr, 0, i);
