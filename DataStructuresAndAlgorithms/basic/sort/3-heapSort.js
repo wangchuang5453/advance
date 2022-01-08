@@ -15,7 +15,7 @@ class MaxHeap {
   _shiftUp(k) {
     while(k > 1 && this._data[Math.floor(k/2)] < this._data[k]) {
       swap(this._data, Math.floor(k/2), k);
-      k = Math.floor(k/2);
+      k = Math.floor(k/2); // 条件不符合才会继续往上
     }
   }
 
@@ -28,7 +28,7 @@ class MaxHeap {
       if (j+1 <= this.count && this._data[j+1] > this._data[j]) {
         j++;
       }
-      if (this._data[k] >= this._data[j]) {
+      if (this._data[k] >= this._data[j]) { // 符合了就不再继续往下
         break;
       }
       swap(this._data, k, j); // 可像插入排序一样，一步步挪，然后赋值，而不是一直交换
