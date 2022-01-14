@@ -219,3 +219,6 @@ let arr = [1, 1, '1', '1', null, null, undefined, undefined, new String('1'), ne
  * 3的话 array.indexOf(item) === index 因为indexOf取不到NaN得到-1不等于index直接干掉了，问题就比较大了
  */
 
+/**
+ * 还可以用reduce处理
+ */

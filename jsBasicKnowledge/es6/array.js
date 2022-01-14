@@ -12,13 +12,14 @@ function flat(arr, d = 1) {
       } else {
         res = res.concat(value)
       }
+      return res;
     }, [])
   } else {
     return arr.slice(0);
   }
 }
 
-console.log([1,2,[3,4,5,[1,2,3]]].flat(Infinity)); // [1, 2, 3, 4, 5, 1, 2, 3]
+console.log(flat([1,2,[3,4,5,[1,2,3]]], Infinity)); // [1, 2, 3, 4, 5, 1, 2, 3]
 
 
 /**
