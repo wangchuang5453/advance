@@ -274,6 +274,12 @@ deactivated	     onDeactivated
 
 setup的抽取和复用感觉就是
 
+### 12、
+只是讲了些比较关键的
+还是要自己看文档
+全面看一遍
+通读
+哎
 
 
 
