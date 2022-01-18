@@ -97,21 +97,26 @@ function name(params) {
   });
 }
 
-function spawn(genF) {
+/**
+ * next方法的参数表示上一个yield表达式的返回值
+ * @param {*} genF 
+ * @returns 
+ */
+function spawn(genFn) {
   return new Promise((resolve, reject) => {
-    const gen = genF();
+    const iterator = genFn();
 
     function step(nextF) {
-      let next;
+      let nextRes;
 
       try {
-        next = nextF();
+        nextRes = nextF();
       } catch (error) {
         reject(error);
       }
       
-      if (next.done) {
-        return resolve(next.value);
+      if (nextRes.done) {
+        return resolve(nextRes.value);
       }
 
       /**
@@ -126,14 +131,14 @@ function spawn(genF) {
       //   })
       // }
       // 兼容处理
-      Promise.resolve(next.value).then((v) => {
-        step(function() { return gen.next(v) });
+      Promise.resolve(nextRes.value).then((v) => {
+        step(function() { return iterator.next(v) });
       }, (e) => {
-        step(function() { return gen.throw(e) });
+        step(function() { return iterator.throw(e) });
       })
     }
 
-    step(function() { return gen.next() });
+    step(function() { return iterator.next() });
   });
 }
 

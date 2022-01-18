@@ -7,12 +7,11 @@ function flat(arr, d = 1) {
   if (d > 0) {
     return arr.reduce((res, value) => {
       if (Array.isArray(value)) {
-        res = res.concat(flat(value, d - 1)) 
+        return res.concat(flat(value, d - 1)) 
         // 最外层假如要求是打平2层，到这里遍历拿到一个数组，到这一层就是只需要再打平1层，因为上一层已经打平了，就是新进入一层拿到一个数组，就只需要再打平d-1层 
       } else {
-        res = res.concat(value)
+        return res.concat(value)
       }
-      return res;
     }, [])
   } else {
     return arr.slice(0);

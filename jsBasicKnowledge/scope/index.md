@@ -80,7 +80,7 @@ function v() {
   a = 6; // 赋值
   console.log(a);
 }
-
+v(); // 6
 
 ```
 

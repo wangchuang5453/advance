@@ -30,7 +30,7 @@ map.set(2, 2);
 const set = new Set([1, 2, 3, 4, 5]);
 
 for (const iterator of arr) {
-  console.log(iterator, 'arr');
+  console.log(iterator, 'arr'); // 1 2 3 4
 }
 for (const iterator of obj) {
   console.log(iterator, 'obj');
@@ -55,10 +55,14 @@ for (const iterator of set) {
  * 
  * Symbol.iterator属性本身是一个函数，就是当前数据结构默认的 遍历器生成函数
  * 
- * es6新增了Map WeakMap Set WeakSet
+ * es6新增了Map WeakMap Set WeakSet 
  * 都可以用for of 遍历
  * Array 可以
- * 
+ * 函数的 arguments 对象
+ * NodeList 对象
+ * String
+ * TypedArray
+ * Generator 对象
  */
 
 
