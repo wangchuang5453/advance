@@ -183,8 +183,9 @@ export default {
       data.count++
       data.obj.f++
     }
-
+    //toRefs 非常有用，这样消费组件就可以在不丢失响应性的情况下对返回的对象进行解构/展开
     const { f } = toRefs(data.obj);
+    // const f = ref(data.obj.f);
 
     effect(() => { // data.count 值变化，回调函数就会执行
       console.log(data.count)
