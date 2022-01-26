@@ -53,11 +53,45 @@ web安全
 将布局绘制(paint)在屏幕上。
 
 当页面需要重绘(repait)或者因为某种操作引发重排(reflow)时，该线程就会执行。
+===============
+**重排 重绘**
 改变宽高、布局会引发重排
-改变颜色引发重绘
+ 浏览器窗口发生变化，没放大缩小一次浏览器窗口，该页面所有的元素要进行重排重绘
+ 增加、删除、移动dom元素，更改dom元素的宽高内外边距、内容，修改dom元素的样式
+ ！进行dom元素宽高(offsetTop)等属性的查询，因为每查询一次，浏览器都会对所有的元素进行重新计算，以确保计算的值是正确的
+
+元素的外观变化会引发重绘
+ 元素背景、文字颜色、边框样式发生变化
+
+重绘不一定要重排，因为可能只是元素修改文字颜色，不需要重新布局，重排大多数情况都需要重绘，因为重新排列元素之后要绘制到屏幕上
+
+DOM变动和样式变动，都会触发重新渲染。但是，浏览器已经很智能了，会尽量把所有的变动集中在一起，**排成一个队列**，然后一次性执行，尽量避免多次重新渲染。
+
+```css
+div.style.color = 'blue';
+div.style.marginTop = '30px';
+```
+上面代码中，div元素有两个样式变动，但是浏览器只会触发一次重排和重绘。
+如果写得不好，就会触发两次重排和重绘。
+
+```css
+div.style.color = 'blue';
+var margin = parseInt(div.style.marginTop);
+div.style.marginTop = (margin + 10) + 'px';
+```
+上面代码对div元素设置背景色以后，第二行要求浏览器给出该元素的位置，所以浏览器不得不立即重排。
+获取布局信息的操作会导致**队列刷新**，以下属性和方法需要返回最新的布局信息，最好避免使用。
+```js
+offsetTop, offsetLeft, offsetWidth, offsetHeight
+scrollTop, scrollLeft, scrollWidth, scrollHeight
+clientTop, clientLeft, clientWidth, clientHeight
+getComputedStyle() (currentStyle in IE)
+
+```
+
 width height 普通复合层
 transform GPU加速层
-
+===============
 
 注意，GUI线程和JS引擎线程是互斥的，当JS引擎执行时GUI线程会被挂起，GUI线程会被保存在一个队列中等到JS引擎空闲时立即被执行。
 
