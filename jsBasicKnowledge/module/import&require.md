@@ -15,7 +15,7 @@ commonjs输出的是值的拷贝，es6输出的是值的引用
 
 1.遵循规范
 
-require 是AMD规范引入方式
+require 是CMD规范引入方式
 import是es6的语法标准，如要兼容浏览器的话必须转化成es5的语法
 
 2.调用时间
