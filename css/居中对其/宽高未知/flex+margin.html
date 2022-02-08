@@ -14,13 +14,16 @@
       }
       .child {
         background: tomato;
-        margin: auto;
+        margin: auto; /* 只适用于单个子元素，多个就变成justify-content: space-around 的效果了 */
       }
     </style>
 </head>
 <body>
   <div class="parent">
     <div class="child">jlakfjklafkl</div>
+    <!-- <div class="child">jlakfjklafkl</div>
+    <div class="child">jlakfjklafkl</div>
+    <div class="child">jlakfjklafkl</div> -->
   </div>
 </body>
 </html>
