@@ -1,6 +1,3 @@
-
-
-
 # Number类型
 
 ## 十进制 => x进制
@@ -60,7 +57,7 @@
 
 0.1的二进制格式是：0.0001100011....。二进制无限循环小数
 
-
+============================================================
 
 # 为什么0.1+0.2不等于0.3 ？
 
@@ -77,6 +74,113 @@
 **另外要注意**
 二进制能精确地表示位数有限且分母是2的倍数的小数，比如0.5，0.5在计算机内部就没有舍入误差。
 所以0.5 + 0.5 === 1
+
+
+============================================================
+
+# NaN (not a number)
+
+NaN == NaN // false
+
+'a'/'b'  // NaN
+
+## isNaN 任何不能转换为数值的都会导致返回true
+isNAN(NAN)  // true
+isNAN(10)  // false
+isNAN('10') // false  
+isNAN('blue') // true
+isNAN(true) // false      **true可以转换为1**
+
+============================================================
+
+# 类型转换 Number()
+Number()  // 0 
+
+## boolean => number
+Number(true) // 1  **注意**
+Number(false) // 0
+
+## string => number
+
+Number('11') // 11
+Number('0011') // 11 去0
+Number('    001') // 1 去空格
+Number('    a002') // NaN 去空格后第一个开始看 含有非数字字符就不行了 **parseInt却不同**
+
+浮点格式
+Number('1.1') // 1.1
+Number('01.1') // 1.1 去0
+
+Number('abc') // NaN
+Number('') // 0
+
+x进制 => 10进制
+Number('0xf') // 15
+
+## null => number
+Number(null) // 0
+
+## undefined => number
+Number(undefined) // NaN
+
+
+============================================================
+
+# parseInt
+
+parseInt(22.9) // 22
+
+parseInt('') // NaN
+
+
+从去空格后第一个字符开始判断。
+如果是数值字符或者+—号，则继续依次监测每个字符，直到字符串末尾或者碰到非数值字符；
+如果不是数值字符或者+—号，则直接返回NaN。
+parseInt('  99 blue')  // 99  **Number(  99 blue) 直接NaN**
+parseInt('  a99blue') // NaN
+
+默认按照10进制处理
+parseInt('0xA') // 10 解释为16进制整数
+parseInt('0xf') // 15 解释为16进制整数
+parseInt('22.5') // 22
+parseInt('70') // 70
+
+parseInt('AF', 16) // 175 处理16进制到10进制
+parseInt('AF') // NaN  默认解释为10进制
+
+parseInt('10', 2) // 2
+parseInt('10', 8) // 8
+parseInt('10', 10) // 10
+parseInt('10', 16) // 16
+
+parseInt('3.125e7') // 3
+
+# parseFloat
+
+和parseInt类似，只是处理到浮点数
+
+parseFloat('1234blue') // 1234
+parseFloat('0xA') // 0
+parseFloat('22.5') // 22.5
+parseFloat('22.34.5') // 22.34
+parseFloat('0908.5') //908.5
+
+parseFloat('3.125e7') // 31250000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
