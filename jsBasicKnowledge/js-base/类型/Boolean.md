@@ -1,5 +1,7 @@
 # 转换类型
 
+Boolean() // false 空
+
 # string
 非空字符串 => true
 '' => false
@@ -8,10 +10,19 @@
 非0数值 包括无穷 Infinite => true
 0 NaN => false
 
-# Object
-任意对象 => true
+# null
 null => false
 
-# Undefined
+# undefined
 undefined => false
+
+# symbol
+let s = Symbol()
+
+s => true
+
+# Object
+任意对象 => true
+
+
 

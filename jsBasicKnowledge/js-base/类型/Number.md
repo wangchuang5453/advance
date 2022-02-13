@@ -123,6 +123,10 @@ Number(null) // 0
 ## undefined => number
 Number(undefined) // NaN
 
+## symbol
+let s = Symbol()
+Number(s) // TypeError: Cannot convert a Symbol value to a number
+
 
 ============================================================
 
