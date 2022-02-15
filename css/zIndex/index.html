@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .outer {
+            position: relative;
+        }
+        .inner {
+            position: absolute;
+            z-index: 3;
+            top: 0;
+            left: 0;
+            background-color: aquamarine;
+        }
+        .inner1 { /* 同级比较，子元素再大也超不过比父元素z-index大的兄弟元素 */
+            position: absolute;
+            z-index: 2;
+            top: 13px;
+            left: 0;
+            background-color: antiquewhite;
+        }
+        .inner1-1 {
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            background-color: red;
+        }
+        .inner1-2 {
+            position: absolute;
+            z-index: 1;
+            top: 10px;
+            left: 0;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="inner">inner</div>
+        <div class="inner1">
+            inner1
+            <div class="inner1-1">inner1-1</div>
+            <div class="inner1-2">inner1-2</div>
+        </div>
+    </div>
+</body>
+</html>
