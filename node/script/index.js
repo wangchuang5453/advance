@@ -16,7 +16,6 @@ const lines = ast.getFullText().split('\n');
 const matches = [];
 
 const hasChinese = (text) => {
-  
   if (CHINESE_REGEX.test(text) && DOUBLE_BYTE_REGEX.test(text)) {
     return true;
   }
@@ -37,9 +36,7 @@ function removeFileComment(code, fileName) {
 }
 
 const check = (text, start, end, node) => {
-  console.log(text, '===haha');
   if (hasChinese(text)) {
-    console.log(text, '===jajaj');
     const lineAndCharacter = ast.getLineAndCharacterOfPosition(start); // 返回行列信息 line: number character: number
     const lineText = lines[lineAndCharacter.line]
     
@@ -76,7 +73,6 @@ const check = (text, start, end, node) => {
           return
       }
       
-      
       matches.push({
         text,
         line: lineText,
@@ -99,14 +95,14 @@ const visit = (node) => {
         const { children } = node;
         children.forEach(child => {
           if (child.kind === ts.SyntaxKind.JsxText) {
-              const text = child.getText();
-              /** 修复注释含有中文的情况，Angular 文件错误的 Ast 情况 */
-              const noCommentText = removeFileComment(text, 'react.jsx');// filename
-              if (noCommentText.match(DOUBLE_BYTE_REGEX)) {
-                const start = child.getStart();
-                const end = child.getEnd();
-                check(noCommentText.trim(), start, end, node);
-              }
+            const text = child.getText();
+            /** 修复注释含有中文的情况，Angular 文件错误的 Ast 情况 */
+            const noCommentText = removeFileComment(text, 'react.jsx');// filename
+            if (noCommentText.match(DOUBLE_BYTE_REGEX)) {
+              const start = child.getStart();
+              const end = child.getEnd();
+              check(noCommentText.trim(), start, end, node);
+            }
           }
         });
         break;
