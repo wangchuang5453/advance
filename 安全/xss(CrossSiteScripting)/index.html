@@ -8,5 +8,11 @@
 </head>
 <body>
   <a href="javascript:alert(&#x27;XSS&#x27;)">跳转...</a>
+  <div onclick="test()">test</div>
+  <script>
+    function test() {
+      alert(1);
+    }
+  </script>
 </body>
 </html>

@@ -59,12 +59,12 @@ JavaScript 通过 Ajax 加载业务数据，调用 DOM API 更新到页面上。
 
 在纯前端渲染中，我们会明确的告诉浏览器：
 下面要设置的内容是文本（.innerText），还是属性（.setAttribute），还是样式（.style）等等。
-浏览器不会被轻易的被欺骗，执行预期外的代码了。
+**浏览器不会被轻易的被欺骗，执行预期外的代码了。**
 
-但纯前端渲染还需注意避免 DOM 型 XSS 漏洞（例如 onload 事件和 href 中的 javascript:xxx 等，请参考下文”预防 DOM 型 XSS 攻击“部分）。
+**但纯前端渲染还需注意避免 DOM 型 XSS 漏洞**（例如 onload 事件和 href 中的 javascript:xxx 等，请参考下文”预防 DOM 型 XSS 攻击“部分）。
 
 在很多内部、管理系统中，采用纯前端渲染是非常合适的。
-但对于性能要求高，或有 SEO 需求的页面，我们仍然要面对拼接 HTML 的问题。
+但对于性能要求高，或有 SEO 需求的页面，我们**仍然要面对拼接 HTML 的问题**。
 
 #### 转义 HTML
 
@@ -136,6 +136,60 @@ var __INITIAL_STATE__ = JSON.parse('<%= Encoder.forJavaScript(data.to_json) %>')
 
 
 ### 预防 DOM 型 XSS 攻击
+
+DOM 型 XSS 攻击，实际上就是网站前端 JavaScript 代码本身不够严谨，把不可信的数据当作代码执行了。
+
+在使用 .innerHTML、.outerHTML、document.write() 时要特别小心，不要把不可信的数据作为 HTML 插到页面上，而应尽量使用 .textContent、.setAttribute() 等。
+
+如果用 Vue/React 技术栈，并且不使用 v-html/dangerouslySetInnerHTML 功能，就在前端 render 阶段避免 innerHTML、outerHTML 的 XSS 隐患。
+
+DOM 中的内联事件监听器，如 location、onclick、onerror、onload、onmouseover 等，<a> 标签的 href 属性，JavaScript 的 eval()、setTimeout()、setInterval() 等，都能把字符串作为代码运行。如果不可信的数据拼接到字符串中传递给这些 API，很容易产生安全隐患，请务必避免。
+```html
+<!-- 内联事件监听器中包含恶意代码 -->
+<img onclick="UNTRUSTED" onerror="UNTRUSTED" src="data:image/png,">
+
+<!-- 链接内包含恶意代码 -->
+<a href="UNTRUSTED">1</a>
+
+<script>
+// setTimeout()/setInterval() 中调用恶意代码
+setTimeout("UNTRUSTED")
+setInterval("UNTRUSTED")
+
+// location 调用恶意代码
+location.href = 'UNTRUSTED'
+
+// eval() 中调用恶意代码
+eval("UNTRUSTED")
+</script>
+```
+
+如果项目中有用到这些的话，一定要避免在字符串中拼接不可信数据。
+
+### 其他 XSS 防范措施
+
+虽然在渲染页面和执行 JavaScript 时，通过谨慎的转义可以防止 XSS 的发生，**但完全依靠开发的谨慎仍然是不够的**。
+以下介绍**一些通用的方案，可以降低 XSS 带来的风险和后果**。
+
+严格的 CSP 在 XSS 的防范中可以起到以下的作用：
+
+禁止加载外域代码，防止复杂的攻击逻辑。
+禁止外域提交，网站被攻击后，用户的数据不会泄露到外域。
+禁止内联脚本执行（规则较严格，目前发现 GitHub 使用）。
+禁止未授权的脚本执行（新特性，Google Map 移动版在使用）。
+合理使用上报可以及时发现 XSS，利于尽快修复问题。
+
+
+关于 CSP 的详情，请关注前端安全系列后续的文章。
+
+#### 输入内容长度控制
+
+对于不受信任的输入，都应该限定一个合理的长度。虽然无法完全防止 XSS 发生，但可以增加 XSS 攻击的难度。
+
+#### 其他安全措施
+HTTP-only Cookie: 禁止 JavaScript 读取某些敏感 Cookie，攻击者完成 XSS 注入后也无法窃取此 Cookie。
+验证码：防止脚本冒充用户提交危险操作。
+
 
 
 
