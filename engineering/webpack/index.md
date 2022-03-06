@@ -58,7 +58,12 @@ cache-loader，也能开启缓存，用法非常简单，在开销较大的loade
 ```
 
 
+待续
+https://juejin.cn/post/6844904174937718792
+webpack优化解决项目体积大、打包时间长、刷新时间长问题！
 
+https://juejin.cn/post/6844904093463347208
+带你深度解锁Webpack系列(优化篇)
 
 
 
