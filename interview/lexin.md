@@ -5,6 +5,34 @@ sourcemap 线上定位问题怎么做
 vue-router 相关问题一堆
 
 组件库组件按需引用 怎么实现的
+import { Button } from 'element-ui';
+Vue.use(Button);
+
+Babel-plugin-component 转换为
+// 全局引入
+var ElementUI = require('element-ui/lib')
+require('element-ui/lib/theme-chalk/index.css')
+Vue.use(ElementUI)
+// 按需引入
+var Button = require('element-ui/lib/button.js')
+require('element-ui/lib/theme-chalk/button.css')
+var Checkbox = require('element-ui/lib/checkbox.js')
+require('element-ui/lib/theme-chalk/checkbox.css')
+Vue.use(Button)
+Vue.component(Checkbox.name, Checkbox)
+```js .babelrc配置
+{
+  "plugins": [
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      }
+    ]
+  ]
+}
+```
 
 安全类的问题
 xss csrf
