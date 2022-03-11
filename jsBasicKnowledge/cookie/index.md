@@ -64,7 +64,21 @@ $('#user_name').text(user_info[' name']);
 $('#user_avatar').attr("src", user_info[' avatar']);
 
 $('#user_id').val(user_info[' id']);
+
 ```
+
+## withCredentials
+
+withCredentials是XMLHttpRequest的一个属性，表示跨域请求是否提供凭据信息(cookie、HTTP认证及客户端SSL证明等)
+
+实际中用途就是跨域请求是要不要携带cookie
+
+
+
+
+
+
+
 
 # Session机制
 
