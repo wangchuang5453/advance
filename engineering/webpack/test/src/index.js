@@ -2,7 +2,7 @@ import a from './views/a.js';
 import './css/c.less';
 export function b() {
   a.test();
-  console.log('index.js');
+  console.log('index.js ====');
 }
 
 function generate() {
