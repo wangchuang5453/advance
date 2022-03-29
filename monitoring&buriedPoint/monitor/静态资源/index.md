@@ -19,3 +19,5 @@ window.addEventListener('error', (event) => {
 
 APM 平台一般会有所有静态资源加载的明细，其原理是通过 PerformanceResourceTiming API 来采集静态资源加载的基本情况，这里不做展开。
 
+
+
