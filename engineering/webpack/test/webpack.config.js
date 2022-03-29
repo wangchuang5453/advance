@@ -47,6 +47,20 @@ module.exports = {
         ],
         exclude: /node_modules/
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'static/assets/',
+              esModule: false,
+              publicPath: 'http://e.hiphotos.baidu.com/image/pic/item/',
+              name: '[name].[ext]',
+            },
+          },
+        ],
+      },
     ],
   },
   devServer: {
