@@ -132,5 +132,9 @@ const getFullPath = (path) => {
   return join(publicPath, path)
 };
 
-const res = getFullPath('static/media/dropdown-arrow.svg');
-console.log(res);
+// const res = getFullPath('static/media/dropdown-arrow.svg');
+// console.log(res);
+
+const path = require('path');
+const p = path.join('www.baidu.com', 'static/favicon.ico');
+console.log(p, '=====');

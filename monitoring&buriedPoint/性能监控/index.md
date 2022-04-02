@@ -140,3 +140,36 @@ Long Task: 阻塞主线程达 50 毫秒或以上的任务。
 我们也可以像计算fmp一样的方法来计算tti，在可交互的元素渲染后打点，虽然需要手动打点，但比较可靠。)
 
 
+### FID
+![first input delay](./fid.png)
+
+FID(First Input Delay) 用于度量用户第一次与页面交互的延迟时间，是用户第一次与页面交互到浏览器真正能够开始处理事件处理程序以响应该交互的时间。
+
+其实现使用简洁的 PerformanceEventTiming API 即可，回调的触发时机是用户首次与页面发生交互并得到浏览器响应（点击链接、输入文字等）。
+
+获取 FID
+```js
+
+const onFirstInputEntry = (entry) => {
+  const fid = entry.processingStart - entry.startTime;
+  console.log(fid);
+  //report({fid});
+}
+
+const observer = new PerformanceObserver((entryList) => {
+  entryList.getEntries().forEach(onFirstInputEntry)
+})
+observer.observe({type: 'first-input', buffered: true});
+
+```
+
+至于为何新的标准中采用 FID 而非 TTI，可能存在以下几个因素：
+
+1.FID 是需要用户实际参与页面交互的，只有用户进行了交互动作才会上报 FID，TTI 不需要。
+2.FID 反映用户对页面交互性和响应性的第一印象，良好的第一印象有助于用户建立对整个应用的良好印象。
+
+## Visual Stability 视觉稳定
+
+### CLS
+
+![Cumulative Layout Shift]()

@@ -11,9 +11,20 @@ function getPaintTimings() {
   }
 }
 
+// const observer = new PerformanceObserver((entryList) => {
+//   for (const entry of entryList.getEntries()) {
+//     console.log('LCP candidate', entry.startTime, entry);
+//   }
+// })
+// observer.observe({type: 'largest-contentful-paint', buffered: true});
+
+const onFirstInputEntry = (entry) => {
+  const fid = entry.processingStart - entry.startTime;
+  console.log(fid);
+  //report({fid});
+}
+
 const observer = new PerformanceObserver((entryList) => {
-  for (const entry of entryList.getEntries()) {
-    console.log('LCP candidate', entry.startTime, entry);
-  }
+  entryList.getEntries().forEach(onFirstInputEntry)
 })
-observer.observe({type: 'largest-contentful-paint', buffered: true});
+observer.observe({type: 'first-input', buffered: true});
