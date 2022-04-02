@@ -172,4 +172,21 @@ observer.observe({type: 'first-input', buffered: true});
 
 ### CLS
 
-![Cumulative Layout Shift]()
+![Cumulative Layout Shift](./cls.png)
+
+CLS(Cumulative Layout Shift) 是对在页面的整个生命周期中发生的每一次意外布局变化的最大布局变化得分的度量，布局变化得分越小证明你的页面越稳定。
+
+听起来有点复杂，这里做一个简单的解释：
+
+1.不稳定元素：一个非用户操作但发生较大偏移的可见元素称为不稳定元素。
+2.布局变化得分：元素从原始位置偏移到当前位置影响的页面比例 * 元素偏移距离比例
+
+举个例子，一个占据页面高度 50% 的元素，向下偏移了 25%，那么其得分为 0.75 * 0.25，大于标准定义的 0.1 分，该页面就视为视觉上没那么稳定的页面。
+
+![举例说明](./cls2.png)
+
+使用 Layout Instability API 和 PerformanceObserver 来获取 CLS：
+
+获取 CLS
+
+

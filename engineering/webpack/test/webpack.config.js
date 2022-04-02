@@ -76,8 +76,16 @@ module.exports = {
     compress: true,
   },
   plugins: [
+    // new HtmlWebpackPlugin({
+    //   template: './index.html'
+    // }),
     new HtmlWebpackPlugin({
-      template: './index.html'
+      template: './index.ejs',
+      inject: 'body',
+      // version: pkg.version,
+      buildDate: new Date().toLocaleString(),
+      title: 'test',
+      cfavicon: path.join('https://code.ubtrobot.com/', 'static/favicon.ico'),
     }),
   ],
 };
