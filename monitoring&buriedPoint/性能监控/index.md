@@ -189,4 +189,65 @@ CLS(Cumulative Layout Shift) 是对在页面的整个生命周期中发生的每
 
 获取 CLS
 
+```js
+let clsValue = 0;
+let clsEntries = [];
+let sessionValue = 0;
+let sessionEntries = [];
+new PerformanceObserver((entryList) => {
+  for (const entry of entryList.getEntries()) {
+    if (!entry.hadRecentInput) {
+      const firstSessionEntry = sessionEntries[0];
+      const lastSessionEntry = sessionEntries[sessionEntries.length - 1];
+      if (sessionValue
+          && entry.startTime - lastSessionEntry.startTime < 1000
+          && entry.startTime - firstSessionEntry.startTime < 5000) {
+        sessionValue += entry.value;
+        sessionEntries.push(entry);
+      } else {
+        sessionValue = entry.value;
+        sessionEntries = [entry];
+      }
+      if (sessionValue > clsValue) {
+        clsValue = sessionValue;
+        clsEntries = sessionEntries;
+        console.log('CLS:', clsValue, clsEntries);
+      }
+    }
+  }
+}).observe({ type: 'layout-shift', buffered: true });
+```
 
+一点感受：在翻阅诸多参考资料后，私以为性能监控是一件长期实践、以实际业务为导向的事情，业内主流标准日新月异，到底监控什么指标是最贴合用户体验的我们不得而知，对于 FMP、FPS 这类浏览器未提供 API 获取方式的指标花费大量力气去探索实现是否有足够的收益也存在一定的疑问，但毋容置疑的是从自身页面的业务属性出发，结合一些用户反馈再进行相关手段的优化可能是更好的选择。（更推荐深入了解浏览器渲染原理，写出性能极佳的页面，让 APM 同学失业
+
+# 数据上报
+
+得到所有错误、性能、用户行为以及相应的环境信息后就要考虑如何进行数据上报，理论上正常使用ajax 即可，但有一些数据上报可能出现在页面关闭 (unload) 的时刻，这些请求会被浏览器的策略 cancel 掉，因此出现了以下几种解决方案：
+
+1.优先使用 Navigator.sendBeacon，这个 API 就是为了解决上述问题而诞生，它通过 HTTP POST 将数据异步传输到服务器且不会影响页面卸载。
+
+2.如果不支持上述 API，动态创建一个 <img / > 标签将数据通过 url 拼接的方式传递。
+
+3.使用同步 XHR 进行上报以延迟页面卸载，不过现在很多浏览器禁止了该行为。
+
+（Slardar 采取了第一种方式，不支持 sendBeacon 则使用 XHR，偶尔丢日志的原因找到了。）
+
+由于监控数据通常量级都十分庞大，因此不能简单地采集一个就上报一个，需要一些优化手段：
+
+1.请求聚合：将多条数据聚合一次性上报可以减少请求数量，例如我们打开任意一个已接入 Slardar 的页面查看 batch 请求的请求体：
+
+2.设置采样率： 像崩溃、异常这类数据不出意外都是设置 100% 的采样率，对于自定义日志可以设置一个采样率来减少请求数量，大致实现思路如下：
+```js
+// sampleRate 0~1
+Report.send = function (data, sampleRate) {
+  // 采样率
+  if (Math.random() < sampleRate) {
+    return send(data) // 上报错误信息
+  }
+}
+```
+
+# 总结
+本文旨在提供一个相对体系的前端监控视图，帮助各位了解前端监控领域我们能做什么、需要做什么。此外，如果能对页面性能和异常处理有着更深入的认知，无论是在开发应用时的自我管理（减少 bug、有意识地书写高性能代码），还是自研监控 SDK 都有所裨益。
+
+如何设计监控 SDK 不是本文的重点，部分监控指标的定义和实现细节也可能存在其他解法，实现一个完善且健壮的前端监控 SDK 还有很多技术细节，例如每个指标可以提供哪些配置项、如何设计上报的维度、如何做好兼容性等等，这些都需要在真实的业务场景中不断打磨和优化才能趋于成熟。
