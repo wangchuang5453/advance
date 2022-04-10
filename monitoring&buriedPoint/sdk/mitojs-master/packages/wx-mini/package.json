@@ -1,0 +1,34 @@
+{
+  "name": "@mitojs/wx-mini",
+  "version": "3.0.1",
+  "description": "A SDK For Monitoring wx-mini Errors",
+  "author": "cjinhuo",
+  "license": "MIT",
+  "main": "dist/wx-mini.js",
+  "module": "dist/wx-mini.js",
+  "types": "dist/wx-mini.d.ts",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/mitojs/mitojs/blob/master/packages/wx-mini/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitojs/mitojs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mitojs/mitojs/issues"
+  },
+  "keywords": [
+    "mitojs",
+    "sdk",
+    "wx-mini",
+    "monitor"
+  ],
+  "dependencies": {
+    "@mitojs/core": "3.0.1",
+    "@mitojs/utils": "3.0.1",
+    "@mitojs/shared": "3.0.1",
+    "@mitojs/types": "3.0.1",
+    "@types/wechat-miniprogram": "^3.1.0"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@mitojs/web",
+  "version": "3.0.1",
+  "description": "A SDK For Monitoring Web(React、Vue) Errors",
+  "author": "cjinhuo(https://github.com/cjinhuo)",
+  "license": "MIT",
+  "main": "dist/web.js",
+  "module": "dist/web.esm.js",
+  "types": "dist/web.d.ts",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/mitojs/mitojs/blob/master/packages/web/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitojs/mitojs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mitojs/mitojs/issues"
+  },
+  "keywords": [
+    "mitojs",
+    "sdk",
+    "web",
+    "monitor"
+  ],
+  "dependencies": {
+    "@mitojs/browser": "3.0.1",
+    "@mitojs/react": "3.0.1",
+    "@mitojs/vue": "3.0.1"
+  }
+}
