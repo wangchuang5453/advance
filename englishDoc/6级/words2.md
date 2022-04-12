@@ -137,4 +137,195 @@ The Netherlands has been reclaiming farmland from water.
 The diamond towns are gradually being reclaimed by the desert.
 那些开采钻石的小镇逐渐被沙漠重新吞噬了。
 
+16.orientation 英  [ˌɔːriənˈteɪʃ(ə)n]
+n. 目标，定位；方向，朝向；
+（基本的）态度，倾向；
+（岗前、学前、课前等的）情况介绍，培训；
+适应，熟悉
+
+a marketing orientation.
+一个营销目标。
+
+To a society which has lost its orientation he has much to offer.
+对一个迷失了方向的社会，他有许多要做的。
+
+They give their new employees a day or two of orientation.
+他们对新员工进行一两天的培训。
+
+Farnese had the orientation of the church changed so that the front would face a square.
+法尔内塞把教堂的朝向改了，使其正面对着一个广场。
+
+=> orient 英  [ˈɔːrient]
+vt.使适应；确定方向；使朝东 
+n.东方；东方诸国 
+adj.东方的 
+vi.向东 
+n.(Orient)人名；(西)奥连特；(法)奥里安
+
+You will need the time to orient yourself to your new way of eating.
+你需要时间适应新的吃法。
+
+Orient Express 东方快车
+
+17.huddle 英  [ˈhʌd(ə)l]
+v.蜷缩，依偎；（私下）开会，（暗中）碰头；
+（美式足球队员）靠拢（听取指示）；
+草率做成 
+n.（尤指杂乱地）挤在一起的人（或物品、建筑）；私下商议，秘密碰头；（美式足球）聚拢听取指示的一群队员；
+<旧>混乱，杂乱 【名】 （Huddle）（美、英、加）赫德尔（人名）
+
+Mr. Pell huddled in a corner with his notebook on his knees.
+佩尔先生缩在一个角落里,笔记本放在膝盖上。
+
+Tired and lost, we huddled together.
+又累又迷了路，我们挤在一起。
+
+Off to one side, Sticht, Macomber, Jordan, and Kreps huddled to discuss something.
+史蒂希特、麦康伯、乔丹和克雷普斯走到一边，私下商量起事情。
+
+The president has been huddling with his most senior aides.
+总统一直在和他的顶级高级助理们秘密地聚到一起进行商谈。
+
+We lay there: a huddle of bodies, gasping for air.
+我们躺在那儿：挤作一团，大口地喘着气。
+
+18.hasty 英  [ˈheɪsti]
+adj.匆忙的，仓促的；草率的，轻率的；
+<古>易怒的 【名】 （Hasty）（英）黑斯蒂（人名）
+
+A number of the United States' allies had urged him not to make a hasty decision.
+美国的一些盟友都力劝其不要作出草率的决定。
+
+Donald had overturned a chair in his hasty departure.
+唐纳德仓促离开时撞翻了一把椅子。
+
+I decided that nothing should be done hastily, that things had to be sorted out carefully.
+我决定不草率的采取任何行动，先得认真地理清头绪。
+
+19.cancer 英  [ˈkænsə(r)]
+n.癌症；痼疾，社会恶习；巨蟹宫，巨蟹座（Cancer）；出生于巨蟹宫时段（即6月22日至7月22日）的人（Cancer）
+
+20.breed 英  [briːd]
+v.交配繁殖；饲养，培育；养育，培养；引起，酿成；（通过核反应）增殖可裂变物质 
+n.品种；（人的）类型，种类 【名】 （Breed）（美）布里德（人名）
+
+rare breeds of cattle.
+稀有牛种。
+
+He lived alone, breeding horses and dogs.
+他独自生活,养殖马和狗。
+
+He used to breed dogs for the police.
+他过去为警察部门养殖狗。
+
+21.finance 英  [ˈfaɪnæns]
+n.财政，金融；资金，财源；财务事务，经济情况 
+v.提供资金；贷款购买，赊购 【名】 （Finance）（法）菲南斯（人名）
+
+The fund has been used largely to finance the construction of federal prisons.
+该基金大部分已用于资助联邦监狱的建造。
+
+A United States delegation is in Japan seeking finance for a major scientific project.
+1个美国代表团正在日本为一个重大科研项目寻求资助。
+
+a major player in the world of high finance.
+高层金融界的大腕。
+
+The report recommends an overhaul of public finances.
+这份报告建议对公共财政进行彻底检视。
+
+22.imaginative 英  [ɪˈmædʒɪnətɪv]
+adj.富于想像力的，创新的；运用想象（力）的，虚构的
+
+an imaginative writer.
+一位富有想像力的作家。
+
+23.establish 英  [ɪˈstæblɪʃ]
+v.建立，设立；
+证实，确定；
+发现，找出；
+使被接受，使得到承认；使（故事的角色）真实；
+（桥牌）（通过出大牌）使（某）花色所剩的牌都能赢
+
+We had already established contact with the museum.
+我们已经与那个博物馆建立了联系。
+
+Medical tests established that she was not their own child.
+医学检测证实她不是他们的亲生孩子。
+
+It will be essential to establish how the money is being spent.
+搞清这笔钱是如何被花费的将至关重要。
+
+That link is an established medical fact.
+那种联系是被证实了的医学事实。
+
+24.reconcile 英  [ˈrekənsaɪl]
+v.调和，使协调一致；
+（使）和解，（使）恢复友好关系；
+调停，调解（争吵）；
+使顺从于，使接受；
+核对，查核（账目）
+
+It's difficult to reconcile the demands of my job and the desire to be a good father.
+协调我工作的要求与我当个好父亲的愿望很难。
+
+He never believed he and Susan would be reconciled.
+他不认为他和苏珊会和好。
+
+my attempt to reconcile him with Toby.
+我使他与托比和解的努力。
+
+She had reconciled herself to never seeing him again.
+她不情愿地接受了再也不和他见面的事实。
+
+She felt, if not grateful for her own situation, at least a little more reconciled to it.
+她觉得，即便对自己的处境不心存感激，至少能将就一些了。
+
+25.fracture 英  [ˈfræktʃə(r)]
+n.破裂，断裂；骨折；（尤指岩层的）裂缝，裂痕；
+（语音）元音割裂；由单元音割裂成的复合元音
+v.破裂，折断；瓦解，分裂；毁坏，破坏；违反，越出……范围
+
+26.enthusiastic 英  [ɪnˌθjuːziˈæstɪk]
+adj.热心的，热情的
+
+Tom was very enthusiastic about the place.
+汤姆曾非常热衷于那个地方。
+
+The announcement was greeted enthusiastically.
+这则通告受到了热烈的欢迎。
+
+26.priority 英  [praɪˈɒrəti]
+n.优先事项，最重要的事；优先，优先权，重点；<英>优先通行权 adj.优先的
+
+The government's priority is to build more power plants.
+政府的当务之急是建造更多的发电厂。
+
+27.nutrition 英  [njuˈtrɪʃ(ə)n]
+n.营养，滋养；营养学；食物，营养物
+
+There are alternative sources of nutrition to animal meat.
+有能替代动物肉类的其他营养来源。
+
+28.contest 英  [ˈkɒntest]
+n.比赛，竞赛；争夺，竞争；争论，争执 v.争辩，提出异议；争取赢得，角逐
+
+The state election in November will be the last such ballot before next year's presidential contest.
+11月的州选举将是明年的总统竞选前最后一轮这类投票。
+
+29.deviate 英  [ˈdiːvieɪt]
+v.偏离，违背；使偏离，使背离 
+adj.反常的，变态的 
+n.异常者，变态者
+
+They stopped you as soon as you deviated from the script.
+你一偏离剧本，他们就会叫停。
+
+30.pamphlet 英  [ˈpæmflət]
+n.小册子，活页 v.向……散发小册子
+
+a pamphlet about smoking.
+一本关于吸烟的小册子。
+
+
 
