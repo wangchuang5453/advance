@@ -1,0 +1,10 @@
+<swiper class="swiper_box" bindchange="swiperchange" indicator-active-color="#fff" indicator-dots>
+  <block wx:for="{{imgUrls}}">
+    <swiper-item>
+      <image mode="aspectFill" class="swiper-image" src="{{item}}" />
+    </swiper-item>
+  </block>
+</swiper>
+<view class="btn">
+  <button wx:if="{{swiperCurrent + 1 == swiperMaxNumber}}" type="primary" size="mini" bindtap="goToIndex">进入店铺</button>
+</view>

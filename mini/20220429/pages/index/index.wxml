@@ -1,0 +1,24 @@
+<van-sticky>
+  <view class="search-container">
+    <view
+      class="search"
+      style="height: {{navHeight}}px;padding-top: {{navTop}}px"
+    >
+      <view
+        class="search-title"
+        style="height:{{navHeight-navTop-5}}px;line-height:{{navHeight-navTop-5}}px;width:{{132/52*(navHeight-navTop-5)}}px;"
+      >
+        天使童装
+      </view>
+      <input
+        placeholder-class="search-placeholder"
+        type="text"
+        placeholder="输入关键词搜索"
+        disabled
+        style="width:{{menuButtonObject.left-18-((132/52)*(navHeight-navTop-5))}}px"
+        bindtap="goSearch"
+      />
+    </view>
+  </view>
+</van-sticky>
+<view>jdjjdjdj</view>
