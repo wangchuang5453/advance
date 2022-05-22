@@ -2,11 +2,11 @@
  * 稠密图
  */
 
-class DenseGraph {
+export class DenseGraph {
   private n: number; // 点
   private m: number; // 边
   private directed: boolean;
-  public g: Array<Array<boolean>>;
+  private g: Array<Array<boolean>>;
   constructor(n: number, directed: boolean) {
     this.n = n;
     this.m = 0;
@@ -43,8 +43,31 @@ class DenseGraph {
     if (w < 0 || w >= this.n) return;
     return this.g[v][w];
   }
+
+  static adjIterator = class {
+    private G: DenseGraph;
+    private v: number;
+    private index: number;
+    constructor(graph: DenseGraph, v: number) {
+      this.G = graph;
+      this.v = v;
+      this.index = -1;
+    }
+    begin() {
+      this.index = -1;
+      return this.next();
+    }
+    next() {
+      for (this.index += 1; this.index < this.G.V(); this.index ++) {
+        if (this.G.g[this.v][this.index]) {
+          return this.index;
+        }
+      }
+      return -1;
+    }
+    end(): boolean {
+      return this.index >= this.G.V();
+    }
+  }
 }
 
-// const d = new DenseGraph(3, true);
-// d.addEdge(1, 1);
-// console.log(d.g);

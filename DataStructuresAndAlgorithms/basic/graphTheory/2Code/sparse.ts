@@ -2,11 +2,11 @@
  * 稀疏图
  */
 
- class SparseGraph {
+export class SparseGraph {
   private n: number; // 点
   private m: number; // 边
   private directed: boolean;
-  public g: Array<Array<number>>;
+  private g: Array<Array<number>>;
   constructor(n: number, directed: boolean) {
     this.n = n;
     this.m = 0;
@@ -34,7 +34,7 @@
       console.error('w out of bounds');
       return;
     };
-    // 处理平行边，遍历 O(n) 邻接表的一个缺点
+    // 处理平行边，遍历 O(n) 邻接表的一个缺点 暂时不考虑不处理平行边以保证性能
     // if (this.hasEdge(v, w)) {
     //   return;
     // }
@@ -62,11 +62,36 @@
     }
     return false;
   }
+
+  /**
+   * 稀疏图邻边迭代器
+   */
+  static adjIterator = class {
+    private G: SparseGraph;
+    private v: number;
+    private index: number;
+    constructor(graph: SparseGraph, v: number) {
+      this.G = graph;
+      this.v = v;
+      this.index = -1;
+    }
+    begin() {
+      this.index = 0;
+      if (this.G.g[this.v].length > 0) {
+        return this.G.g[this.v][this.index];
+      }
+      return -1;
+    }
+    next() {
+      this.index ++;
+      if (this.index < this.G.g[this.v].length) {
+        return this.G.g[this.v][this.index];
+      }
+      return -1;
+    }
+    end(): boolean {
+      return this.index >= this.G.g[this.v].length;
+    }
+  }
 }
-
-// const d = new SparseGraph(3, true);
-// d.addEdge(1, 2);
-// d.addEdge(0, 2);
-// console.log(d.g);
-
 
