@@ -50,7 +50,7 @@ JavaScript 是用于实现网页交互逻辑的，涉及到 dom 操作，如果�
 有了插队机制之后，高优任务就能得到及时的执行。
 这就是现在浏览器的 Event Loop。
 其中普通任务叫做 MacroTask（宏任务），高优任务叫做 MicroTask（微任务）。
-宏任务包括：setTimeout、setInterval、requestAnimationFrame、Ajax、fetch、script 标签的代码。
+宏任务包括：setTimeout、setInterval、requestAnimationFrame、Ajax、fetch、**script 标签**的代码。
 微任务包括：Promise.then、MutationObserver、Object.observe(这个接口已经被废弃并从各浏览器中移除)。
 
 ```js MutationObserver
@@ -95,3 +95,43 @@ observer.disconnect();
 
 但是后来，JS 的执行环境不只是浏览器一种了，还有了 Node.js，它同样也要解决这些问题，但是它设计出来的 Event Loop 更细致一些。
 
+
+## node官网 事件循环 图文并茂
+http://www.nodejs.cn/learn/the-nodejs-event-loop
+
+当调用 setTimeout() 时，浏览器或 Node.js 会启动定时器。 当定时器到期时（在此示例中会立即到期，因为将超时值设为 0），则回调函数会被放入“消息队列”中。
+
+在消息队列中，用户触发的事件（如单击或键盘事件、或获取响应）也会在此排队，然后代码才有机会对其作出反应。 类似 onLoad 这样的 DOM 事件也如此。
+
+事件循环会赋予调用堆栈优先级，它首先处理在调用堆栈中找到的所有东西，**一旦其中没有任何东西**，便开始处理消息队列中的东西。
+
+我们不必等待诸如 setTimeout、fetch、或其他的函数来完成它们自身的工作，因为它们是由浏览器提供的，并且位于它们自身的线程中。 例如，如果将 setTimeout 的超时设置为 2 秒，但不必等待 2 秒，等待发生在其他地方。
+
+
+
+## tick
+在Event Loop中，每一次循环称为tick，每一次tick的任务如下：
+
+执行栈选择最先进入队列的宏任务（一般都是script），执行其同步代码直至结束；
+检查是否存在微任务，有则会执行至微任务队列为空；
+如果宿主为浏览器，可能会渲染页面；
+开始下一轮tick，执行宏任务中的异步代码（setTimeout等回调）。
+
+
+单线程的运行环境有且只有一个call-stack调用栈(执行栈)，所有的任务(代码)都会被放到调用栈等待浏览器的主线程执行。
+
+此时整体代码script作为第一个宏任务开始执行，执行到异步代码时会先把异步代码放到event Table/webapi注册，注册之后根据异步代码选择放入微任务/宏任务的event queue，同时继续执行主线程中的同步代码。
+
+整体代码执行完之后event loop会先检查微任务Event Queue队列中有没有回调函数，如果有就将它放到执行栈中执行(执行完一个函数检查一次队列，如果队列还有函数就再继续执行下一个一个函数，以此类推队列的函数一个一个执行)，执行完微任务Event Queue后第一轮事件循环就结束了。
+
+第二轮循环事件开始，先从宏任务开始，发现宏任务Event Queue中有上一轮保存的回调函数，立即执行，执行完检查该回调函数中有没有微任务，有就放入微任务Eevent Queue，执行完宏任务之后就又执行刚刚放入的微任务，结束
+后续如果有嵌套更多的微/宏任务就继续像上面一样循环，直到执行完所有代码
+
+每当事件循环进行一次完整的行程时，我们都将其称为一个滴答。
+
+当将一个函数传给 process.nextTick() 时，则指示引擎在当前操作结束（在下一个事件循环滴答开始之前）时调用此函数：
+```js
+process.nextTick(() => {
+  //做些事情
+})
+```

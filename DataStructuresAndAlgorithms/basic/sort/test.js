@@ -10,8 +10,8 @@ const { mergeSort, mergeSortBU, quickSort, quickSort2, quickSort3, quickSort4, q
 const { heapSort1, heapSort2, heapSort3 } = require('./3-heapSort.js');
 const { getTopK } = require('./4-indexMaxHeap-ex.js');
 
-const bubbleArr = generateRandomArray(10000, 0, 10000000);
-// const bubbleArr = generateNearlyOrderedArray(1000000, 100)
+// const bubbleArr = generateRandomArray(1000000, 0, 10000000);
+const bubbleArr = generateNearlyOrderedArray(100000, 100)
 // const bubbleArr = generateNearlyOrderedArray(10000, 100).reverse();
 // const bubbleArr = generateNearlyOrderedArray(10000, 0);
 // 重复数组
@@ -30,7 +30,7 @@ const bubbleArr = generateRandomArray(10000, 0, 10000000);
 /**
  * *有序数据* 排序现在的快排（quickSort2）超级慢
  */
-// testSort(quickSort2, bubbleArr.concat([]));
+testSort(quickSort2, bubbleArr.concat([]));
 
 
 /**
@@ -73,7 +73,7 @@ const bubbleArr = generateRandomArray(10000, 0, 10000000);
  * 2、使用堆的方式获取，O(nlogm)
  */
 
-testSort(getTopK, bubbleArr.concat([]));
+// testSort(getTopK, bubbleArr.concat([]));
 
 
 
